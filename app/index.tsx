@@ -1,6 +1,7 @@
-import { Image, Text, useColorScheme, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, useColorScheme, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from './../constant/Colors';
+import { useRouter } from "expo-router";
 
 
 
@@ -8,29 +9,100 @@ import colors from './../constant/Colors';
 
 export default function Index() {
 
-  const theme = useColorScheme();
-  const isDarkMode = theme === 'dark';
-
-  const bgColor = isDarkMode ? colors.BLACK : colors.WHITE;
+  const router = useRouter();
 
 
   return (
-    <SafeAreaView
-      style={[{
-        flex: 1,
-        backgroundColor: isDarkMode ? colors.BLACK : colors.WHITE
-        
-      },
-      
-      ]}
+    <SafeAreaView style={{
+      flex: 1,
+      // backgroundColor: isDarkMode ? colors.BLACK : colors.WHITE,
+      backgroundColor: colors.WHITE
+    }}
     >
       <Image
         source={require('./../assets/images/landing.png')}
         style={{
           width: '100%',
           height: 300,
+          marginTop: 60
         }}
       />
+
+      <View style={{
+        padding: 25,
+        backgroundColor: colors.PRIMARY,
+        height: '100%',
+        borderTopLeftRadius: 35,
+        borderTopRightRadius: 35
+      }}>
+        <Text style={{
+          fontSize: 30,
+          textAlign: 'center',
+          color: colors.WHITE,
+          fontFamily: 'outfit-bold'
+        }}>Welcome to F-Academy</Text>
+        <Text style={{
+          fontSize: 18,
+          color: colors.WHITE,
+          marginTop: 20,
+          textAlign: 'center',
+          fontFamily: 'outfit'
+        }}>Transform your ideas into engaging educational content, effortlessly with AI !</Text>
+
+
+        <View style={styles.container}>
+          <Pressable
+            style={styles.button}
+            onPress={()=>router.push('/auth/SignUp')}
+          >
+            <Text style={[styles.buttonText, { color: colors.PRIMARY }]}>
+              Get Started</Text>
+          </Pressable>
+
+          <Pressable
+            style={[styles.button, {
+              backgroundColor: 'none',
+              borderWidth: 2,
+              borderColor: colors.WHITE
+            }]}
+            onPress={() => router.push('/auth/SignIn')}
+          >
+            <Text style={[styles.buttonText, { color: colors.WHITE }]}>
+              Already have an account?</Text>
+
+          </Pressable>
+        </View>
+
+
+
+      </View>
     </SafeAreaView>
   );
 }
+
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#f8f9fa',
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: colors.WHITE,
+
+  },
+  buttonText: {
+    color: colors.BLACK,
+    fontSize: 18,
+    textAlign: 'center',
+    fontFamily: 'outfit-bold'
+  },
+});
