@@ -1,17 +1,32 @@
 import { Image, Pressable, StyleSheet, Text, useColorScheme, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import colors from './../constant/Colors';
+import colors from '../constant/Colors';
 import { useRouter } from "expo-router";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../config/firebaseConfig";
+import { useContext, } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { AuthContext } from "@/contexts/AuthContext";
 
 
 
 
 
 export default function Index() {
-
   const router = useRouter();
+  const { setUser } = useContext(AuthContext);
 
 
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      console.log("User logged in:", user);
+      const result = await getDoc(doc(db, "users", user?.email))
+      setUser(result.data())
+      router.replace('/(tabs)/home')
+    } else {
+      console.log("No user logged in");
+    }
+  })
   return (
     <SafeAreaView style={{
       flex: 1,
@@ -53,7 +68,7 @@ export default function Index() {
         <View style={styles.container}>
           <Pressable
             style={styles.button}
-            onPress={()=>router.push('/auth/SignUp')}
+            onPress={() => router.push('/auth/SignUp')}
           >
             <Text style={[styles.buttonText, { color: colors.PRIMARY }]}>
               Get Started</Text>

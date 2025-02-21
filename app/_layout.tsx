@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { View, Text } from "react-native";
 import { useFonts } from 'expo-font';
+import { AllContexts } from './../contexts/AllContexts';
 
 export default function RootLayout() {
 
@@ -10,10 +11,10 @@ export default function RootLayout() {
     'outfit-bold': require('./../assets/fonts/Outfit-Bold.ttf')
   })
   return (
-    <Stack screenOptions={{
-      headerShown: false
-    }}>
-
-    </Stack>
+    <AllContexts>
+      <Stack screenOptions={{ headerShown: false }}>
+        
+      </Stack>
+    </AllContexts>
   );
 }
