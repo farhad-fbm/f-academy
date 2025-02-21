@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { View, Text } from "react-native";
 import { useFonts } from 'expo-font';
-import { AllContexts } from './../contexts/AllContexts';
+import { AllContexts } from '../contexts/AllContexts';
 
 export default function RootLayout() {
 
@@ -13,7 +13,7 @@ export default function RootLayout() {
   return (
     <AllContexts>
       <Stack screenOptions={{ headerShown: false }}>
-        
+
       </Stack>
     </AllContexts>
   );

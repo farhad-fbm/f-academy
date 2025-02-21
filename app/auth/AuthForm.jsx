@@ -1,10 +1,10 @@
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { Image } from 'react-native';
-import colors from './../../constant/Colors';
+import colors from '../../constant/Colors';
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from './../../config/firebaseConfig';
+import { auth, db } from '../../config/firebaseConfig';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { AuthContext } from '../../contexts/AuthContext';
 
